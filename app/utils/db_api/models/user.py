@@ -20,7 +20,7 @@ class User(BaseModel):
     status_blocked: bool = Column(Boolean, default=False)
     reason_for_blocking: str = Column(String(255))
 
-    property
+    @property
     def url_to_telegram(self) -> str:
         return f"tg://user?id={self.id}"
 

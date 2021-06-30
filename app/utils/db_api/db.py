@@ -9,6 +9,7 @@ db = Gino()
 
 class BaseModel(db.Model):
     __abstract__ = True
+
     __tablename__: str
     query: Query
 
@@ -47,4 +48,4 @@ class BaseModel(db.Model):
         if op == 'or':
             return or_(*conditions)
         if op == 'and':
-            return or_(*conditions)
+            return and_(*conditions)
