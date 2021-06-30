@@ -5,7 +5,9 @@ from loguru import logger
 from sqlalchemy import Column, DateTime
 from sqlalchemy.orm import Query
 from sqlalchemy.sql.elements import or_, and_
+
 db = Gino()
+
 
 class BaseModel(db.Model):
     __abstract__ = True
