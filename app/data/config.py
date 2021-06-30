@@ -4,8 +4,18 @@ from dataclasses import dataclass
 @dataclass
 class BotConfig:
     token: str
-    admins_channel: int
+    admin_id: int
+
+@dataclass
+class DatabaseConfig:
+    host: str
+    port: int
+    db: str
+    db_user: str
+    db_pass: str
+    url: str
 
 @dataclass
 class Config:
     bot: BotConfig
+    database: DatabaseConfig

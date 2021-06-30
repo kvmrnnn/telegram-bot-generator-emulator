@@ -1,6 +1,6 @@
 import configparser
 
-from app.data.config import BotConfig, Config
+from app.data.config import BotConfig, Config, DatabaseConfig
 
 
 class ConfigLoader:
@@ -15,13 +15,30 @@ class ConfigLoader:
     def _get_bot_config(self) -> BotConfig:
         bot_config = BotConfig(
             self._config['BotConfig']['token'],
-            self._config['BotConfig']['admins_channel'],
+            self._config['BotConfig']['admin_id'],
         )
         return bot_config
 
+    def _get_database_config(self) -> DatabaseConfig:
+        host = self._config['DatabaseConfig']['host']
+        port = self._config['DatabaseConfig']['port']
+        db = self._config['DatabaseConfig']['db']
+        db_user = self._config['DatabaseConfig']['db_user']
+        db_pass = self._config['DatabaseConfig']['db_pass']
+        database_config = DatabaseConfig(
+            host,
+            port,
+            db,
+            db_user,
+            db_pass,
+            f'postgresql://{db_user}:{db_pass}@{host}:{port}/{db}',
+        )
+        return database_config
+
     def get_config(self) -> Config:
         config = Config(
-            self._get_bot_config()
+            self._get_bot_config(),
+            self._get_database_config()
         )
         return config
 
