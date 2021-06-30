@@ -6,6 +6,7 @@ class BotConfig:
     token: str
     admin_id: int
 
+
 @dataclass
 class DatabaseConfig:
     host: str
@@ -14,6 +15,7 @@ class DatabaseConfig:
     db_user: str
     db_pass: str
     url: str
+
 
 @dataclass
 class Config:
