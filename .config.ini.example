@@ -1,6 +1,12 @@
 [BotConfig]
 token=1738561819:AAFlPNvZOzYxFruUu4CLTg9qdsaxL2g2IA4
-admin_id=#channel id from telegram
+admin_id=1778377370
+chats_id=0 0 0 0
+
+[BotCommands]
+start=Главное меню
+help=Помощь
+settings=Настройки профиля
 
 [DatabaseConfig]
 host=localhost
@@ -8,3 +14,5 @@ port=5432
 db=bots
 db_user=postgres
 db_pass=db_pass
+
+

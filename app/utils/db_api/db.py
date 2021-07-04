@@ -8,7 +8,6 @@ from sqlalchemy.sql.elements import or_, and_
 
 db = Gino()
 
-
 class BaseModel(db.Model):
     __abstract__ = True
 
@@ -25,9 +24,16 @@ class BaseModel(db.Model):
         :return:
         """
         await self.update(**kwargs).apply()
-        logger.success(f"{self.__tablename__} (id: {self.id}) set new param {kwargs}")
+        logger.success(f"Db: {self.__tablename__} (id: {self.id}) set new param {kwargs}")
 
-    def qf(self, op: str = 'and', **kwargs):
+    @classmethod
+    async def insert(cls, **kwargs):
+        model = cls(**kwargs)
+        logger.success(f'Db: {model.__tablename__} (id: {model.id}) new row {kwargs}')
+        await model.create()
+
+    @classmethod
+    def qf(cls, op: str = 'and', **kwargs):
         """
         Query filter
         :param op:
@@ -37,7 +43,7 @@ class BaseModel(db.Model):
         conditions = []
         for key, value in kwargs.items():
             try:
-                column: Column = getattr(self, key)
+                column: Column = getattr(cls, key)
                 if 'int' in str(column.type).lower():
                     conditions.append(column == int(value))
                 elif 'float' in str(column.type).lower():

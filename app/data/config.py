@@ -5,6 +5,8 @@ from dataclasses import dataclass
 class BotConfig:
     token: str
     admin_id: int
+    chats_id: list
+    commands: dict
 
 
 @dataclass

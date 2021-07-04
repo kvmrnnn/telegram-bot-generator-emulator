@@ -1,14 +1,17 @@
 from aiogram import Dispatcher
 
+from app.data.types.user import UserRole
+from app.utils import db_api
+from app.utils.bot import sending_message
+from app.utils.bot.set_commands import set_bot_commands
 from app.loader import config
-from app.utils.db_api.db import db
-
 
 async def on_startup(dp: Dispatcher):
-    # Подключение к базе данных.
-    await db.set_bind(config.database.url)
 
-    # При коммите комментировать! Иначе все данные в таблицах сотрутся.
-    await db.gino.drop_all()
-    # Создание таблиц.
-    await db.gino.create_all()
+    await db_api.on_startup(1)
+
+    await set_bot_commands(dp)
+
+    await sending_message.text('Бот включен', [UserRole.ADMIN], config.bot.admin_id)
+    
+

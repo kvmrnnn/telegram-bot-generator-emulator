@@ -1,21 +1,36 @@
 import configparser
 
+from loguru import logger
+
 from app.data.config import BotConfig, Config, DatabaseConfig
 
 
 class ConfigLoader:
 
     def __init__(self, path_to_config: str):
+        logger.info(f'Config: Read Config')
         self._path_to_config = path_to_config
         self._config = configparser.ConfigParser()
 
         self._config.read(self._path_to_config)
 
+    def get_config(self) -> Config:
+        config = Config(
+            self._get_bot_config(),
+            self._get_database_config()
+        )
+        return config
+
+    def get_bot_commands(self):
+        return dict(self._config['BotCommands'])
+
 
     def _get_bot_config(self) -> BotConfig:
         bot_config = BotConfig(
             self._config['BotConfig']['token'],
-            self._config['BotConfig']['admin_id'],
+            int(self._config['BotConfig']['admin_id']),
+            [int(chat_id) for chat_id in self._config['BotConfig']['chats_id'].split()],
+            self.get_bot_commands()
         )
         return bot_config
 
@@ -35,11 +50,6 @@ class ConfigLoader:
         )
         return database_config
 
-    def get_config(self) -> Config:
-        config = Config(
-            self._get_bot_config(),
-            self._get_database_config()
-        )
-        return config
+
 
 

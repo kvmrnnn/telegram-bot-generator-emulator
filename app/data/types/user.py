@@ -8,11 +8,16 @@ class UserLang:
 
 
 class UserRole:
-    ADMIN = '999'
-    DEFAULT = '1'
-    BLOCKED = '-1'
+    ADMIN = 'admin'
+    DEFAULT = 'default'
 
 
 class UserDeepLink:
     NONE = 0
     tags = []
+
+class UserPhone:
+    NONE = '-'
+
+class UserDataHistory:
+    NONE = ''
