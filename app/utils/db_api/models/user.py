@@ -1,8 +1,9 @@
-from typing import List
+from typing import List, Union
 
 from sqlalchemy import Column, BigInteger, String, Boolean
 
-from app.data.types.user import UserUsername, UserLang, UserRole, UserDeepLink, UserPhone, UserDataHistory
+from app.data.types.user import UserUsername, LangCode, UserRole, UserDeepLink, UserPhone, UserDataHistory
+from app.loader import config
 from app.utils.db_api.db import BaseModel
 
 
@@ -12,7 +13,7 @@ class User(BaseModel):
     id: int = Column(BigInteger, primary_key=True)
     fullname: str = Column(String(128))
     phone: str = Column(String(24), default=UserPhone.NONE)
-    lang: str = Column(String(10), default=UserLang.RUS)
+    lang: str = Column(String(10), default=config.bot.default_lang)
     username: str = Column(String(32), default=UserUsername.NONE)
     full_name_history: str = Column(String, default=UserDataHistory.NONE)
     username_history: str = Column(String, default=UserDataHistory.NONE)
@@ -29,8 +30,10 @@ class User(BaseModel):
     def url_to_telegram(self) -> str:
         return f"tg://user?id={self.id}"
 
-    def is_role(self, roles: List[str]) -> bool:
-        return self.role in roles
+    def is_role(self, roles: Union[str, List[str]]) -> bool:
+        if isinstance(roles, list):
+            return self.role in roles
+        return self.role == roles
 
     def get_username_history(self) -> list:
         return self.username_history.rstrip().splitlines()

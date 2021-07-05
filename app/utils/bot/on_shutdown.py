@@ -10,6 +10,6 @@ async def on_shutdown(dp: Dispatcher):
 
     await set_bot_commands(dp, None)
 
-    await sending_message.text('Бот выключен', [UserRole.ADMIN], config.bot.admin_id)
+    await sending_message.text_message('Бот выключен', [UserRole.ADMIN], config.bot.admin_id)
 
 

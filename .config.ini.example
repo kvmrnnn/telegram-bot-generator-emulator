@@ -1,7 +1,9 @@
 [BotConfig]
 token=1738561819:AAFlPNvZOzYxFruUu4CLTg9qdsaxL2g2IA4
+default_lang=rus
+second_lang=eng
 admin_id=1778377370
-chats_id=0 0 0 0
+chats_id=
 
 [BotCommands]
 start=Главное меню

@@ -14,26 +14,31 @@ class ConfigLoader:
 
         self._config.read(self._path_to_config)
 
+    @property
     def get_config(self) -> Config:
         config = Config(
-            self._get_bot_config(),
-            self._get_database_config()
+            self._get_bot_config,
+            self._get_database_config
         )
         return config
 
+    @property
     def get_bot_commands(self):
         return dict(self._config['BotCommands'])
 
-
+    @property
     def _get_bot_config(self) -> BotConfig:
         bot_config = BotConfig(
             self._config['BotConfig']['token'],
+            self._config['BotConfig']['default_lang'],
+            self._config['BotConfig']['second_lang'] or self._config['BotConfig']['default_lang'],
             int(self._config['BotConfig']['admin_id']),
             [int(chat_id) for chat_id in self._config['BotConfig']['chats_id'].split()],
-            self.get_bot_commands()
+            self.get_bot_commands
         )
         return bot_config
 
+    @property
     def _get_database_config(self) -> DatabaseConfig:
         host = self._config['DatabaseConfig']['host']
         port = self._config['DatabaseConfig']['port']
@@ -49,7 +54,3 @@ class ConfigLoader:
             f'postgresql://{db_user}:{db_pass}@{host}:{port}/{db}',
         )
         return database_config
-
-
-
-

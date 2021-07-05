@@ -1,0 +1,1 @@
+Welcome, <b>{user_fullname}</b>! <i>Admin</i>

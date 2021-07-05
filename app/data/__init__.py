@@ -1,1 +1,1 @@
-from . import text
+from .text import text

@@ -2,11 +2,8 @@ from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 
 from app.data import text
 
-keyboard = ReplyKeyboardMarkup(
-    resize_keyboard=True,
-    keyboard=[
-        [
-            KeyboardButton(text=text.button.default.reply.agree_rules)
-        ]
-    ]
-)
+
+def keyboard(user_lang: str) -> ReplyKeyboardMarkup:
+    markup = ReplyKeyboardMarkup(resize_keyboard=True)
+    markup.insert(KeyboardButton(text=text[user_lang].button.default.reply.agree_rules))
+    return markup

@@ -8,7 +8,6 @@ class NotChatType(BoundFilter):
 
     def __init__(self, chat_types: List[str]):
 
-
         if isinstance(chat_types, list):
             self.chat_types = list(set(chat_types))
         elif isinstance(chat_types, str):

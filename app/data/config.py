@@ -4,6 +4,8 @@ from dataclasses import dataclass
 @dataclass
 class BotConfig:
     token: str
+    default_lang: str
+    second_lang: str
     admin_id: int
     chats_id: list
     commands: dict

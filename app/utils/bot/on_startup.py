@@ -12,6 +12,6 @@ async def on_startup(dp: Dispatcher):
 
     await set_bot_commands(dp)
 
-    await sending_message.text('Бот включен', [UserRole.ADMIN], config.bot.admin_id)
+    await sending_message.text_message('Бот включен', roles=[UserRole.ADMIN], chats_id=config.bot.admin_id)
     
 

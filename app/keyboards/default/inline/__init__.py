@@ -1,1 +1,1 @@
-from . import generator_url_btn
+from . import menu_settings

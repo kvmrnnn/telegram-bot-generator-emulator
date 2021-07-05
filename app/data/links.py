@@ -3,22 +3,23 @@ from dataclasses import dataclass
 
 @dataclass
 class MiscLinks:
-    pass
+    github: str
 
 
 @dataclass
 class PhotoLinks:
-    pass
+    photo: str
 
 
 @dataclass
 class VideoLinks:
     read_rules: str
+    window_windows_xp: str
 
 
 @dataclass
 class DocumentLinks:
-    pass
+    doc: str
 
 
 @dataclass
