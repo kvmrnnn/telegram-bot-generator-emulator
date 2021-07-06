@@ -1,6 +1,6 @@
 from aiogram.types import Message, ContentTypes
 
-from app import dp
+from app.loader import dp
 from app.data import text
 from app.filters.private.user.is_read_rules import NotReadRules
 from app.keyboards.default import reply

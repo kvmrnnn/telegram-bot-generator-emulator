@@ -1,6 +1,7 @@
 from aiogram.types import CallbackQuery
 
-from app import dp, keyboards
+from app import keyboards
+from app.loader import dp
 from app.data import text
 from app.data.types.menu_cd import MenuSettingsCD
 from app.keyboards.default.callback_data.settings_profile import menu_settings_cd

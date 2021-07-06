@@ -1,7 +1,7 @@
 from aiogram.dispatcher import FSMContext
 from aiogram.types import Message
 
-from app import dp
+from app.loader import dp
 from app.utils.bot import send_main_keyboard
 
 

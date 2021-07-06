@@ -1,11 +1,9 @@
-from datetime import datetime
+from aiogram.types import CallbackQuery
 
-from aiogram.types import CallbackQuery, MediaGroup
-
-from app import dp
+from app.loader import dp
 from app.data import text
 from app.data.types.menu_cd import MenuSettingsCD
-from app.data.types.tmp_files import ExcelFile, TextFile
+from app.data.types.tmp_files import ExcelFile
 from app.keyboards.default.callback_data.settings_profile import menu_settings_cd
 from app.utils.db_api.models.user import User
 from app.utils.format_data.user import format_username, format_lang_code
