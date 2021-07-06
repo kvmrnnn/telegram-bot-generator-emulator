@@ -1,16 +1,12 @@
 from aiogram.utils import executor
 
 from app import dp
-from app.data.types.tmp_files import BaseTmpFile, ExсelFile
 from app.utils.bot import on_startup, on_shutdown
 
 
 
 def main():
-
-    file = ExсelFile()
-
-    # executor.start_polling(dp, on_startup=on_startup, on_shutdown=on_shutdown)
+    executor.start_polling(dp, on_startup=on_startup, on_shutdown=on_shutdown)
 
 if __name__ == '__main__':
     main()
