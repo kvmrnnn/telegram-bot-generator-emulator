@@ -29,8 +29,8 @@ class BaseTmpFile:
             return str(datetime.utcnow()).replace(".", ":").replace(" ", "_")
         return filename.replace(".", ":").replace(" ", "_")
 
-    # def __del__(self):
-    #     os.remove(self.path_to_file)
+    def __del__(self):
+        os.remove(self.path_to_file)
 
 
 class ExсelFile(BaseTmpFile):
@@ -46,3 +46,28 @@ class ExсelFile(BaseTmpFile):
 
     def write_data(self, **data):
         self.book.save(self.path_to_file)
+
+
+class TextFile(BaseTmpFile):
+
+    def __init__(self, filename=None, extension='txt'):
+        super().__init__(filename, extension)
+
+    def write_text(self, text: str, mode_a: bool = False):
+        mode = 'w'
+        if mode_a:
+            mode = 'a'
+
+        with open(self.path_to_file, mode) as file:
+            return file.write(text)
+
+    def read_text(self, text: str) -> str:
+
+        with open(self.path_to_file) as file:
+            return file.read()
+
+
+class PhotoFile(BaseTmpFile):
+
+    def __init__(self, filename=None, extension='jpeg'):
+        super().__init__(filename, extension)

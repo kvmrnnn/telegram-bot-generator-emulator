@@ -1,7 +1,7 @@
 from aiogram.utils import executor
 
 from app import dp
-from app.data.types.files import BaseTmpFile, ExсelFile
+from app.data.types.tmp_files import BaseTmpFile, ExсelFile
 from app.utils.bot import on_startup, on_shutdown
 
 
