@@ -2,6 +2,7 @@ import os
 from datetime import datetime
 
 from aiogram.types import InputFile
+from loguru import logger
 from openpyxl import Workbook
 
 
@@ -29,8 +30,8 @@ class BaseTmpFile:
             return str(datetime.utcnow()).replace(".", ":").replace(" ", "_")
         return filename.replace(".", ":").replace(" ", "_")
 
-    def __del__(self):
-        os.remove(self.path_to_file)
+    # def __del__(self):
+    #     os.remove(self.path_to_file)
 
 
 class ExсelFile(BaseTmpFile):
@@ -42,9 +43,12 @@ class ExсelFile(BaseTmpFile):
         self.sheet = self.book.active
 
     def _set_columns_name(self, data: dict):
-        pass
+        columns = list(data.keys())
+        for i, column in enumerate(columns, 1):
+            self.sheet.cell(1, i).value = column
 
     def write_data(self, **data):
+        self._set_columns_name(data)
         self.book.save(self.path_to_file)
 
 
