@@ -52,7 +52,6 @@ class ExcelFile(BaseTmpFile):
         for i, row in enumerate(rows, 2):
             self.sheet.cell(i, column_n).value = str(row)
 
-
     def write_data(self, **data):
         self._set_columns_name(data)
         rows_data = list(data.values())
@@ -72,11 +71,10 @@ class TextFile(BaseTmpFile):
         if mode_a:
             mode = 'a'
 
-        with open(self.path_to_file, mode) as file:
+        with open(self.path_to_file, mode, encoding='UTF-8') as file:
             return file.write(text)
 
-    def read_text(self, text: str) -> str:
-
+    def read(self) -> str:
         with open(self.path_to_file) as file:
             return file.read()
 

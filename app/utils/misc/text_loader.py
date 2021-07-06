@@ -13,7 +13,7 @@ class LoaderText:
             if dir in ['__pycache__', '__init__.py']:
                 continue
 
-            file = open(f'{self.__path}/{dir}')
+            file = open(f'{self.__path}/{dir}', encoding='UTF-8')
 
             self.__text[dir.split('.')[0]] = file.read()
 

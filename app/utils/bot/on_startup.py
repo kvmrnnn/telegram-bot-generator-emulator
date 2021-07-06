@@ -8,7 +8,7 @@ from app.utils.bot.set_commands import set_bot_commands
 
 
 async def on_startup(dp: Dispatcher):
-    await db_api.on_startup(0)
+    await db_api.on_startup(False)
 
     await set_bot_commands(dp)
 
