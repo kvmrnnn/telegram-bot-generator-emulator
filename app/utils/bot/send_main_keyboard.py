@@ -8,6 +8,16 @@ from app.utils.db_api.models.user import User
 
 
 async def send_main_keyboard(user: User, state: FSMContext = None):
+    """
+    Send main keyboard depending on his role.
+    Args:
+        user: Object User from table users.
+        state: User state to finished.
+
+    Returns:
+        None
+
+    """
     if state:
         await state.finish()
 

@@ -1,27 +1,57 @@
 from app.data.types.lang import LangCode
-from app.data.types.user import UserUsername
 
 
 def format_username(username: str) -> str:
-    if username == UserUsername.NONE:
-        return 'Not Username'
-    return '@' + username
+    """
+    Formatting username to string.
+    Args:
+        username: username
+
+    Returns:
+        Formatted username.
+    """
+
+    if str(username) == 'None':
+        username = 'User has not username'
+    else:
+        username = '@' + username
+
+    return username
 
 
-def format_fullname(full_name: str) -> str:
-    new_full_name = ''
-    for char in full_name:
+def format_fullname(fullname: str) -> str:
+    """
+    Formatting user fullname.
+    Replace html symbol to html code.
+    Args:
+        fullname: String.
+
+    Returns:
+        Formatted user fullname.
+
+    """
+    new_fullname = ''
+    for char in fullname:
         if char == '<':
-            new_full_name += '&lt;'
+            new_fullname += '&lt;'
         elif char == '>':
-            new_full_name += '&gt;'
+            new_fullname += '&gt;'
         else:
-            new_full_name += char
+            new_fullname += char
 
-    return new_full_name
+    return new_fullname
 
 
 def format_lang_code(lang_code: str) -> str:
+    """
+    Formatting language code to string.
+    Args:
+        lang_code: language code.
+
+    Returns:
+        String formatted language code.
+
+    """
     if lang_code == LangCode.RU:
         return '🇷🇺 Русский'
     elif lang_code == LangCode.ENG:

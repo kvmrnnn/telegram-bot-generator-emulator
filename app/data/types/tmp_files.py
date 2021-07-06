@@ -2,7 +2,6 @@ import os
 from datetime import datetime
 
 from aiogram.types import InputFile
-from loguru import logger
 from openpyxl import Workbook
 
 
@@ -22,19 +21,19 @@ class BaseTmpFile:
 
     @property
     def input_file(self) -> InputFile:
-        return InputFile(self.path_to_file, self.filename)
+        return InputFile(self.path_to_file)
 
     @staticmethod
     def format_filename(filename: str) -> str:
         if not filename:
-            return str(datetime.utcnow()).replace(".", ":").replace(" ", "_")
-        return filename.replace(".", ":").replace(" ", "_")
+            return str(datetime.utcnow()).replace(".", ":").replace(" ", "__").replace(':', '-')
+        return filename.replace(".", ":").replace(" ", "_").replace(':', '-')
 
-    # def __del__(self):
-    #     os.remove(self.path_to_file)
+    def __del__(self):
+        os.remove(self.path_to_file)
 
 
-class ExсelFile(BaseTmpFile):
+class ExcelFile(BaseTmpFile):
 
     def __init__(self, filename=None, extension='xlsx'):
         super().__init__(filename, extension)
@@ -47,8 +46,19 @@ class ExсelFile(BaseTmpFile):
         for i, column in enumerate(columns, 1):
             self.sheet.cell(1, i).value = column
 
+    def _write_rows(self, column_n, rows):
+        if not isinstance(rows, list):
+            rows = [str(rows)]
+        for i, row in enumerate(rows, 2):
+            self.sheet.cell(i, column_n).value = str(row)
+
+
     def write_data(self, **data):
         self._set_columns_name(data)
+        rows_data = list(data.values())
+        for column_n, rows in enumerate(rows_data, 1):
+            self._write_rows(column_n, rows)
+
         self.book.save(self.path_to_file)
 
 

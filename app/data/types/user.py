@@ -1,7 +1,3 @@
-class UserUsername:
-    NONE = '-'
-
-
 class UserRole:
     ADMIN = 'admin'
     DEFAULT = 'default'

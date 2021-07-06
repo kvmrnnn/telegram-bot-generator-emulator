@@ -1,8 +1,9 @@
+from datetime import datetime as dt
 from typing import List, Union
 
-from sqlalchemy import Column, BigInteger, String, Boolean
+from sqlalchemy import Column, BigInteger, String, Boolean, DateTime
 
-from app.data.types.user import UserUsername, UserRole, UserDeepLink, UserPhone, UserDataHistory
+from app.data.types.user import UserRole, UserDeepLink, UserPhone, UserDataHistory
 from app.loader import config
 from app.utils.db_api.db import BaseModel
 
@@ -11,20 +12,24 @@ class User(BaseModel):
     __tablename__ = 'users_template'
 
     id: int = Column(BigInteger, primary_key=True)
+    username: str = Column(String(32))
     fullname: str = Column(String(128))
-    phone: str = Column(String(24), default=UserPhone.NONE)
     lang_code: str = Column(String(10), default=config.bot.default_lang)
-    username: str = Column(String(32), default=UserUsername.NONE)
-    full_name_history: str = Column(String, default=UserDataHistory.NONE)
-    username_history: str = Column(String, default=UserDataHistory.NONE)
-
     deep_link: int = Column(BigInteger, default=UserDeepLink.NONE)
+
+    phone: str = Column(String(24), default=UserPhone.NONE)
+
     role: str = Column(String(20), default=UserRole.DEFAULT)
+
+    username_history: str = Column(String, default=UserDataHistory.NONE)
+    full_name_history: str = Column(String, default=UserDataHistory.NONE)
 
     is_read_rules: bool = Column(Boolean, default=False)
     is_blocked: bool = Column(Boolean, default=False)
     is_active: bool = Column(Boolean, default=True)
     reason_for_blocking: str = Column(String(255))
+
+    online_at: dt = Column(DateTime(), default=dt.utcnow())
 
     @property
     def url_to_telegram(self) -> str:
@@ -51,6 +56,7 @@ class User(BaseModel):
     async def update_username(self, username):
         if self.username == username:
             return False
-        self.username_history += self.username + '\n'
+
+        self.username_history += str(self.username) + '\n'
         await self.update_data(username_history=self.username_history)
         await self.update_data(username=username)
