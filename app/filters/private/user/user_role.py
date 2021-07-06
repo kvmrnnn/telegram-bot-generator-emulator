@@ -1,13 +1,11 @@
 from aiogram.dispatcher.filters import BoundFilter
 from aiogram.types import Message, CallbackQuery, InlineQuery
-from loguru import logger
 
 from app.loader import config
 from app.utils.db_api.models.user import User
 
 
 class UserRoleFilter(BoundFilter):
-
     key = 'user_role'
 
     def __init__(self, user_role: list[str]):

@@ -8,12 +8,14 @@ from app.loader import config
 from app.states.private.registration_new_user import RegistrationNewUser
 
 
-@dp.message_handler(state=RegistrationNewUser.agree_rules, text=text[config.bot.default_lang].button.default.reply.agree_rules)
-@dp.message_handler(state=RegistrationNewUser.agree_rules, text=text[config.bot.second_lang].button.default.reply.agree_rules)
-async def agree_rules(message: Message, state: FSMContext, user, user_lang):
+@dp.message_handler(state=RegistrationNewUser.agree_rules,
+                    text=text[config.bot.default_lang].button.default.reply.agree_rules)
+@dp.message_handler(state=RegistrationNewUser.agree_rules,
+                    text=text[config.bot.second_lang].button.default.reply.agree_rules)
+async def agree_rules(message: Message, state: FSMContext, user, lang_code):
     await state.finish()
     await message.answer(
-        text=text[user_lang].message.default.good
+        text=text[lang_code].message.default.good
     )
     await user.update_data(is_read_rules=True)
     raise SkipHandler()

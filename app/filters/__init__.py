@@ -4,7 +4,6 @@ from app.filters.private.user.not_subscriber import NotSubscribedChat
 from app.filters.private.user.user_role import UserRoleFilter
 from app.loader import dp
 
-
 dp.filters_factory.bind(NotSubscribedChat)
 dp.filters_factory.bind(UserRoleFilter)
 

@@ -1,3 +1,3 @@
 class MenuSettingsCD:
-    choice_lang = '0'
-    information_about_me = '1'
+    menu_settings_lang_code = '0'
+    upload_user_data = '1'

@@ -1,9 +1,10 @@
+from aiogram.dispatcher import FSMContext
 from aiogram.types import Message
 
 from app import dp
-from app.loader import config
+from app.utils.bot import send_main_keyboard
 
 
 @dp.message_handler(state='*')
-async def send_main_keyboard(message: Message, user, user_lang):
-    await message.answer(f'Debug: Ни один хедлер не поймал это событие')
+async def unknown_command(message: Message, state: FSMContext, user, lang_code):
+    await send_main_keyboard(user, state)

@@ -6,7 +6,7 @@ from app.loader import dp
 
 
 @dp.message_handler(CommandHelp())
-async def message_on(message: Message, user_lang):
+async def message_on(message: Message, lang_code):
     await message.answer(
-        text=text[user_lang].message.default.command_help
+        text=text[lang_code].message.default.command_help
     )

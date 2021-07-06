@@ -8,6 +8,7 @@ from sqlalchemy.sql.elements import or_, and_
 
 db = Gino()
 
+
 class BaseModel(db.Model):
     __abstract__ = True
 

@@ -3,6 +3,7 @@ from aiogram.types import Message, CallbackQuery, InlineQuery
 
 from app.utils.db_api.models.user import User
 
+
 class UserBlocked(BoundFilter):
 
     async def check(self, obj: [Message, CallbackQuery, InlineQuery]) -> bool:

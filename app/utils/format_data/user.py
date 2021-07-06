@@ -28,4 +28,3 @@ def format_lang_code(lang_code: str) -> str:
         return '🇺🇸 English'
 
     return 'He yдaлocb oпpeдeлutb Я3ыk'
-

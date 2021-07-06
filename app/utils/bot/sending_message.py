@@ -13,7 +13,6 @@ async def text_message(text: str,
                        markup: InlineKeyboardMarkup = None,
                        **where_conditions
                        ) -> List[int]:
-
     bot = Bot.get_current()
     list_not_success = []
 
@@ -23,7 +22,6 @@ async def text_message(text: str,
         chats_id = [chats_id]
     elif isinstance(chats_id, str):
         chats_id = [int(chats_id)]
-
 
     if roles is not None:
         users = []
@@ -45,11 +43,11 @@ async def text_message(text: str,
 
 
 async def copy_message(message: Message,
-               roles: str = None,
-               chats_id: List[int] = None,
-               markup: InlineKeyboardMarkup = None,
-               **where_conditions
-               ) -> List[int]:
+                       roles: str = None,
+                       chats_id: List[int] = None,
+                       markup: InlineKeyboardMarkup = None,
+                       **where_conditions
+                       ) -> List[int]:
     bot = Bot.get_current()
     list_not_success = []
 
@@ -79,11 +77,12 @@ async def copy_message(message: Message,
 
     return list_not_success
 
+
 async def forward_message(message: Message,
-               roles: str = None,
-               chats_id: List[int] = None,
-               **where_conditions
-               ) -> List[int]:
+                          roles: str = None,
+                          chats_id: List[int] = None,
+                          **where_conditions
+                          ) -> List[int]:
     bot = Bot.get_current()
     list_not_success = []
 
@@ -93,7 +92,6 @@ async def forward_message(message: Message,
         chats_id = [chats_id]
     elif isinstance(chats_id, str):
         chats_id = [int(chats_id)]
-
 
     if roles is not None:
         users = []

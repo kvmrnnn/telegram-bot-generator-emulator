@@ -1,8 +1,8 @@
 from aiogram.dispatcher.filters import BoundFilter
 from aiogram.types import Message, CallbackQuery, InlineQuery
 
-from app.loader import config
 from app.utils.db_api.models.user import User
+
 
 class NotReadRules(BoundFilter):
 

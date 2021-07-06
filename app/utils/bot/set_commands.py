@@ -1,8 +1,8 @@
+from aiogram import Dispatcher
+from aiogram.types import BotCommand
 from loguru import logger
 
 from app.loader import config
-from aiogram import Dispatcher
-from aiogram.types import BotCommand
 
 
 async def set_bot_commands(dp: Dispatcher, commands: dict = config.bot.commands):

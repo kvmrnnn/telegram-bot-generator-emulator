@@ -10,8 +10,8 @@ from app.loader import dp
 
 @dp.callback_query_handler(NewUser())
 @dp.message_handler(NewUser(), NotCommand('start'))
-async def user_not_db(obj: Union[Message, CallbackQuery], user_lang):
+async def user_not_db(obj: Union[Message, CallbackQuery], lang_code):
     await dp.bot.send_message(
         chat_id=obj.from_user.id,
-        text=text[user_lang].message.default.user_not_found_in_user_database
+        text=text[lang_code].message.default.user_not_found_in_user_database
     )

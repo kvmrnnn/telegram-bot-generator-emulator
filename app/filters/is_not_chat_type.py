@@ -14,4 +14,6 @@ class NotChatType(BoundFilter):
             self.chat_types = [chat_types]
 
     async def check(self, obj: Union[Message, CallbackQuery]) -> bool:
-        return not(obj.chat.type in self.chat_types)
+        if isinstance(obj, CallbackQuery):
+            obj = obj.message
+        return not (obj.chat.type in self.chat_types)

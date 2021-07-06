@@ -9,7 +9,6 @@ class StateDataMiddleware(BaseMiddleware):
         dp = Dispatcher.get_current()
         data['state_data'] = await dp.storage.get_data(chat=message.from_user.id)
 
-
     async def on_process_callback_query(self, call: CallbackQuery, data: dict):
         dp = Dispatcher.get_current()
         data['state_data'] = await dp.storage.get_data(chat=call.from_user.id)

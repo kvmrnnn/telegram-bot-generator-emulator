@@ -12,7 +12,7 @@ from app.utils.format_data.user import format_fullname, format_lang_code
 
 
 @dp.message_handler(CommandStart(), NewUser())
-async def message_on(message: Message, user_lang):
+async def message_on(message: Message, lang_code):
     # deep link
     try:
         deep_link = int(message.get_args())
@@ -38,7 +38,7 @@ async def message_on(message: Message, user_lang):
 
     await message.answer_video(
         video=links.video.window_windows_xp,
-        caption=text[user_lang].message.default.welcome.format(
+        caption=text[lang_code].message.default.welcome.format(
             user_fullname=format_fullname(user.fullname),
             default_lang=format_lang_code(config.bot.default_lang)
         ),

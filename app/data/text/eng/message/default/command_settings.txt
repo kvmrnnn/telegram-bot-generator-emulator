@@ -1,1 +1,3 @@
-settings
+Bot settings.
+Here you can change the language in the bot.
+Upload your profile data.

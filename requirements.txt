@@ -4,3 +4,4 @@ gino==1.0.1
 aiogram==2.13
 asyncpg==0.22.0
 aiohttp==3.7.4
+openpyxl
