@@ -16,6 +16,7 @@ class GettingUserFromDataBaseMiddleware(BaseMiddleware):
         if not user:
             data['user'] = None
             data['lang_code'] = config.bot.default_lang
+            return False
 
         if (user.online_at + dt.timedelta(minutes=1)) < dt.datetime.utcnow():
             await user.update_data(online_at=dt.datetime.utcnow())
@@ -32,6 +33,7 @@ class GettingUserFromDataBaseMiddleware(BaseMiddleware):
         if not user:
             data['user'] = None
             data['lang_code'] = config.bot.default_lang
+            return False
 
         if (user.online_at + dt.timedelta(minutes=1)) < dt.datetime.utcnow():
             await user.update_data(online_at=dt.datetime.utcnow())
