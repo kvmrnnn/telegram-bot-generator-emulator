@@ -9,6 +9,7 @@ class BotConfig:
     admin_id: int
     chats_id: list
     commands: dict
+    generate_limit_default: int
 
 
 @dataclass

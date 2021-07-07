@@ -20,7 +20,7 @@ class MagnitCardFilter(BoundFilter):
         if message.document:
             file_document: BufferedWriter = await message.document.download('./app/data/tmp')
             file_document.close()
-            with open(file_document.name, 'r', encoding='UTF-8') as file:
+            with open(file_document.name, encoding='UTF-8') as file:
                 text = file.read()
             os.remove(file_document.name)
         elif message.text:

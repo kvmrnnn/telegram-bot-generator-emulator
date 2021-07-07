@@ -18,11 +18,15 @@ class BaseModel(db.Model):
     create_at: datetime.datetime = Column(DateTime, server_default=db.func.now())
     update_at: datetime.datetime = Column(DateTime, server_default=db.func.now(), server_onupdate=db.func.now())
 
-    async def update_data(self, **kwargs):
+    async def update_data(self, **kwargs: object) -> None:
         """
-        Обновляет данные полей таблицы в базе данных
-        :param kwargs: Поля в таблице и новое значение
-        :return:
+        Refreshes the data of the fields of the table in the database.
+        Args:
+            **kwargs: Fields in the table and the new value.
+
+        Returns:
+            None
+
         """
         await self.update(**kwargs).apply()
         logger.success(f"Db: {self.__tablename__} (id: {self.id}) set new param {kwargs}")

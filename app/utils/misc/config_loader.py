@@ -34,7 +34,8 @@ class ConfigLoader:
             self._config['BotConfig']['second_lang'] or self._config['BotConfig']['default_lang'],
             int(self._config['BotConfig']['admin_id']),
             [int(chat_id) for chat_id in self._config['BotConfig']['chats_id'].split()],
-            self.get_bot_commands
+            self.get_bot_commands,
+            int(self._config['BotConfig']['generate_limit_default']),
         )
         return bot_config
 

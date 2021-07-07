@@ -16,7 +16,7 @@ class BaseTmpFile:
         self.extension = extension
         self.path_to_file = f'{self._path_to_dir_tmp}/{self.filename}.{self.extension}'
 
-        with open(self.path_to_file, 'w+') as file:
+        with open(self.path_to_file, 'w') as file:
             pass
 
     @property

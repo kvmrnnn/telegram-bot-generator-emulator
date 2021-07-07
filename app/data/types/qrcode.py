@@ -10,8 +10,8 @@ from app.data.types.tmp_files import PhotoFile
 class QRCodeBase(PhotoFile):
 
     def __init__(self, data):
-        self.data = self.format_data(data)
         super().__init__()
+        self.data = self.format_data(data)
         self.generate_qrcode()
 
 

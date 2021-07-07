@@ -20,6 +20,7 @@ class EmulatorMagnit(EmulatorBase):
     def __init__(self, code):
         self.file_qrcode = QRCodeMagnit(code)
         super().__init__(self.emulator_path)
+        self.generate()
 
     def generate(self):
         qrcode_img = Image.open(self.file_qrcode.path_to_file)

@@ -1,0 +1,2 @@
+You are trying to generate {user_count} emulators.
+Maximum number of emulators to generate {max_count}.

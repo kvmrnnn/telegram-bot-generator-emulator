@@ -29,7 +29,15 @@ class User(BaseModel):
     is_active: bool = Column(Boolean, default=True)
     reason_for_blocking: str = Column(String(255))
 
-    online_at: dt = Column(DateTime(), default=dt.utcnow())
+    online_at: dt = Column(DateTime, default=dt.utcnow())
+
+    premium_up_to: dt = Column(DateTime, default=dt.utcnow())
+
+    generate_limit: int = Column(BigInteger, default=0)
+
+    @property
+    def is_premium(self):
+        return self.premium_up_to > dt.utcnow()
 
     @property
     def url_to_telegram(self) -> str:
@@ -39,6 +47,21 @@ class User(BaseModel):
         if isinstance(roles, list):
             return self.role in roles
         return self.role == roles
+
+    async def change_premium_time(self, datetime: dt) -> None:
+        """
+        Changes the premium time.
+        Args:
+            datetime: Time to change premium.
+
+        Returns:
+            None
+
+        """
+        if self.premium_up_to + datetime < dt.utcnow():
+            await self.update_data(premium_up_to=dt.utcnow() + datetime)
+        else:
+            await self.update_data(premium_up_to=self.premium_up_to + datetime)
 
     def get_username_history(self) -> list:
         return self.username_history.rstrip().splitlines()

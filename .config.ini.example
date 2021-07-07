@@ -4,6 +4,7 @@ default_lang=rus
 second_lang=
 admin_id=0
 chats_id=
+generate_limit_default=50
 
 [BotCommands]
 start=main menu
