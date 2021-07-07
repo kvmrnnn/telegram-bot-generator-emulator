@@ -11,7 +11,7 @@ class QRCodeBase(PhotoFile):
 
     def __init__(self, data):
         self.data = self.format_data(data)
-        super().__init__(f'QRCODE BASE {data}')
+        super().__init__()
         self.generate_qrcode()
 
 
