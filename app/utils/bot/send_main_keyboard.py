@@ -4,7 +4,7 @@ from aiogram.dispatcher import FSMContext
 from app import keyboards
 from app.data import text
 from app.data.types.user import UserRole
-from app.utils.db_api.models.user import User
+from app.utils.db_api.models.user_model import User
 
 
 async def send_main_keyboard(user: User, state: FSMContext = None):

@@ -6,7 +6,7 @@ from aiogram.utils.exceptions import Throttled
 
 from app.data import text
 from app.loader import config
-from app.utils.db_api.models.user import User
+from app.utils.db_api.models.user_model import User
 
 
 class AntiFloodMiddleware(BaseMiddleware):

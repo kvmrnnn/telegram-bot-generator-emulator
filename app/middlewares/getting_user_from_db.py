@@ -5,7 +5,7 @@ from aiogram.types import Message, CallbackQuery
 from loguru import logger
 
 from app.loader import config
-from app.utils.db_api.models.user import User
+from app.utils.db_api.models.user_model import User
 
 
 class GettingUserFromDataBaseMiddleware(BaseMiddleware):

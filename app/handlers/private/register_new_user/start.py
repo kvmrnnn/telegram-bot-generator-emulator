@@ -7,7 +7,7 @@ from app.data.types.user import UserDeepLink, UserRole
 from app.filters.private.user import NewUser
 from app.loader import links, config
 from app.states.private.registration_new_user import RegistrationNewUser
-from app.utils.db_api.models.user import User
+from app.utils.db_api.models.user_model import User
 from app.utils.format_data.user import format_fullname, format_lang_code
 
 

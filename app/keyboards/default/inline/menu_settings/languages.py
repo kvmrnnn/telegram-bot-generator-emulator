@@ -2,7 +2,7 @@ from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 from app.data.types.lang import LangCode
 from app.keyboards.default.callback_data.settings_profile import choice_lang_cd
-from app.utils.db_api.models.user import User
+from app.utils.db_api.models.user_model import User
 from app.utils.format_data.user import format_lang_code
 
 

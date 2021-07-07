@@ -4,7 +4,7 @@ from aiogram import Bot
 from aiogram.types import InlineKeyboardMarkup, Message
 
 from app.utils.db_api import db
-from app.utils.db_api.models.user import User
+from app.utils.db_api.models.user_model import User
 
 
 async def text_message(text: str,
