@@ -1,6 +1,3 @@
-''
-
-
 def format_code(raw_data: str):
     raw_data = str(raw_data).rstrip()
     try:

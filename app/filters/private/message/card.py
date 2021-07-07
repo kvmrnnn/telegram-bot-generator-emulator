@@ -1,3 +1,5 @@
+import os
+from io import BufferedWriter
 from typing import Union
 
 from aiogram.dispatcher.filters import BoundFilter
@@ -10,17 +12,21 @@ from app.utils.format_data.card import format_code
 
 class MagnitCardFilter(BoundFilter):
     key = 'magnit_card'
+
     def __init__(self, magnit_card: bool = None):
         pass
+
     async def check(self, message: Message) -> Union[bool, dict[str, dict]]:
         if message.document:
-            async with await message.document.download('./app/data/tmp', make_dirs=False) as file:
+            file_document: BufferedWriter = await message.document.download('./app/data/tmp')
+            file_document.close()
+            with open(file_document.name, 'r', encoding='UTF-8') as file:
                 text = file.read()
+            os.remove(file_document.name)
         elif message.text:
             text = message.text
         else:
             return False
-        logger.debug(text)
 
         cards_data = {}
         for data in text.splitlines():

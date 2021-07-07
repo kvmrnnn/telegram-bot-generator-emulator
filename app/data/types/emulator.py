@@ -6,7 +6,7 @@ from app.data.types.tmp_files import PhotoFile
 
 class EmulatorBase(PhotoFile):
     def __init__(self, path_to_emulator):
-        super(EmulatorBase, self).__init__()
+        super().__init__()
         self.path_to_emulator = path_to_emulator
         self.generate()
 
@@ -19,7 +19,7 @@ class EmulatorMagnit(EmulatorBase):
 
     def __init__(self, code):
         self.file_qrcode = QRCodeMagnit(code)
-        super(EmulatorMagnit, self).__init__(self.emulator_path)
+        super().__init__(self.emulator_path)
 
     def generate(self):
         qrcode_img = Image.open(self.file_qrcode.path_to_file)
@@ -39,7 +39,7 @@ class Emulator5ka(EmulatorBase):
 
     def __init__(self, code):
         self.file_qrcode = QRCode5ka(code)
-        super(Emulator5ka, self).__init__(self.emulator_path)
+        super().__init__(self.emulator_path)
 
 
 

@@ -83,5 +83,3 @@ class PhotoFile(BaseTmpFile):
 
     def __init__(self, filename=None, extension='jpeg'):
         super().__init__(filename, extension)
-
-
