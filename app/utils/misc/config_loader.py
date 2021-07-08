@@ -2,7 +2,7 @@ import configparser
 
 from loguru import logger
 
-from app.data.config import BotConfig, Config, DatabaseConfig
+from app.data.types.config import BotConfig, Config, DatabaseConfig
 
 
 class ConfigLoader:

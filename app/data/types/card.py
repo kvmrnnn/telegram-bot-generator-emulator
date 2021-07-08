@@ -1,14 +1,19 @@
 from functools import reduce
 from typing import Union
 
+class CardType:
+    MAGNIT = 'magnit'
+    _5KA = '5ka'
 
-class Card:
+
+class CardBank:
     def __init__(self, code: str, date=None, cvv=None):
-        if not Card.is_code_valid(code):
+        if not CardBank.is_code_valid(code):
             raise ValueError('Invalid data')
-        self.code = code
-        self.date = date
-        self.cvv = cvv
+        self.code = '*'*12 + str(code)[12:]
+        self._code = code
+        self._date = date
+        self._cvv = cvv
 
     @staticmethod
     def is_code_valid(code: Union[str, int]):

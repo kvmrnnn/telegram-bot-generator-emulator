@@ -1,5 +1,6 @@
 import asyncio
 import time
+from datetime import datetime as dt
 
 from aiogram.dispatcher import FSMContext
 from aiogram.types import Message, ContentTypes
@@ -7,6 +8,7 @@ from aiogram.utils.exceptions import RetryAfter
 from loguru import logger
 
 from app.data import text
+from app.data.types.card import CardType
 from app.data.types.emulator import EmulatorMagnit
 from app.filters.private.message.card import MagnitCardFilter
 from app.loader import dp, config
@@ -19,10 +21,21 @@ from app.utils.db_api.models.user_model import User
 @dp.message_handler(MagnitCardFilter())
 @dp.message_handler(MagnitCardFilter(), content_types=ContentTypes.DOCUMENT)
 async def send_magnit_emulator(message: Message, state: FSMContext, user: User, lang_code: str, cards_data: dict):
+
+    # Set limit user personal or default.
     generate_limit = user.generate_limit or config.bot.generate_limit_default
-    count_generated_by_the_user_this_day = await db.scalar(db.func.count(Card.user_id))
+
+    # Count of generated emulators per day.
+    count_generated_by_the_user_this_day = await db.scalar(
+        db.select([db.func.count(Card.id)]). \
+            where(Card.user_id == user.id). \
+            where(Card.create_at > dt.utcnow())
+    )
+
+    # Available count of generation emulators.
     count_free_generate = generate_limit - count_generated_by_the_user_this_day
 
+    # Check if the limit generation is exceeded.
     if len(cards_data) > generate_limit:
         await message.answer(
             text=text[lang_code].message.default.generation_limit_exceeded.format(
@@ -32,13 +45,13 @@ async def send_magnit_emulator(message: Message, state: FSMContext, user: User, 
         )
         return False
 
-    if not user.is_premium and not (count_free_generate > 0):
+    if count_free_generate <= 0:
         await message.answer(
             text=text[lang_code].message.default.generation_limit_exceeded_this_day
         )
         return False
 
-    if not user.is_premium and len(cards_data) > count_free_generate:
+    if len(cards_data) > count_free_generate:
         cards_data_tmp = cards_data.copy()
         cards_data.clear()
         for card, raw_data in list(cards_data_tmp.items())[:count_free_generate]:
@@ -50,6 +63,7 @@ async def send_magnit_emulator(message: Message, state: FSMContext, user: User, 
     try:
         for code, raw_data in cards_data.items():
             await Card.insert(
+                type=CardType.MAGNIT,
                 code=str(code),
                 raw_data=raw_data,
                 user_id=user.id
