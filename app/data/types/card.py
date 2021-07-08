@@ -3,7 +3,7 @@ from typing import Union
 
 class CardType:
     MAGNIT = 'magnit'
-    _5KA = '5ka'
+    _5KA = 'pyaterochka'
 
 
 class CardBank:
