@@ -1,0 +1,3 @@
+Duration of the premium and amount in the format of "days hours amount"
+Example:
+12 12 12 (12 days, 12 hours и 12 items)

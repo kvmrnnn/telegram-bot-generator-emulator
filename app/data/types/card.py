@@ -1,6 +1,7 @@
 from functools import reduce
 from typing import Union
 
+
 class CardType:
     MAGNIT = 'magnit'
     _5KA = 'pyaterochka'
@@ -10,7 +11,7 @@ class CardBank:
     def __init__(self, code: str, date=None, cvv=None):
         if not CardBank.is_code_valid(code):
             raise ValueError('Invalid data')
-        self.code = '*'*12 + str(code)[12:]
+        self.code = '*' * 12 + str(code)[12:]
         self._code = code
         self._date = date
         self._cvv = cvv
