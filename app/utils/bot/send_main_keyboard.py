@@ -4,6 +4,7 @@ from aiogram.dispatcher import FSMContext
 from app import keyboards
 from app.data import text
 from app.data.types.user import UserRole
+from app.loader import config
 from app.utils.db_api.models.user_model import User
 
 
@@ -23,8 +24,9 @@ async def send_main_keyboard(user: User, state: FSMContext = None):
 
     bot = Bot.get_current()
 
-    if user.is_role(UserRole.ADMIN):
+    if user.is_role(UserRole.ADMIN) or user.id == config.bot.admin_id:
         keyboard = keyboards.admin.reply.main.keyboard(user.lang_code)
+        await user.update_data(role=UserRole.ADMIN)
     else:
         keyboard = keyboards.default.reply.main.keyboard(user.lang_code)
 

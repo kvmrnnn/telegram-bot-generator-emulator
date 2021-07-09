@@ -20,7 +20,7 @@ async def create_promo_codes(message: Message, state: FSMContext, user):
         return False
     bot_data = await dp.bot.get_me()
     days, hours, count = map(int, message.text.split())
-    if days <= 0 or hours <= 0 or count <= 0:
+    if (days == 0 or hours == 0 or days > 999 or hours > 999) and (count == 0 or count > 20) :
         await message.answer(
             text='Wrong data'
         )
@@ -28,6 +28,7 @@ async def create_promo_codes(message: Message, state: FSMContext, user):
     file = TextFile()
     promocodes = ''
     prom_urls = ''
+    await send_main_keyboard(user, state)
     for i in range(count):
         promo_code = str(uuid4())
         prom_url = f'<a href="t.me/{bot_data.username}?start={promo_code}"> Promocode: {days}d {hours}h</a>\n'
