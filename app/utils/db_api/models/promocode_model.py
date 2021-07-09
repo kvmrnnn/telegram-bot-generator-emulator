@@ -11,7 +11,7 @@ class Promocode(BaseModel):
     premium_datetime: str = Column(String(51))
     user_id: int = Column(BigInteger)
     creator_user_id: int = Column(BigInteger)
-    is_active: bool = Column(Boolean)
+    is_active: bool = Column(Boolean, default=True)
 
     @property
     def premium_timedelta(self) -> dt.timedelta:
