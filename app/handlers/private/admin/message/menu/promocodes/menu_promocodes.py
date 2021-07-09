@@ -11,5 +11,5 @@ from app.loader import dp, config
 async def choose_action(message: Message, lang_code):
     await message.answer(
         text=text[lang_code].message.admin.choose_action,
-        reply_markup=reply.promocodes.choose_action.make_keyboard_choose_action(lang_code)
+        reply_markup=reply.promocodes.prom_menu.make_keyboard_choose_action(lang_code)
     )

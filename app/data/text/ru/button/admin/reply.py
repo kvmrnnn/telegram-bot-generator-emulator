@@ -5,5 +5,5 @@ sending_messages = 'Рассылка сообщений'
 send_poll = 'Отправить опрос'
 send_message = 'Отправить сообщение'
 search_info = 'Поиск информации'
-
-
+delete_all_proms = 'Остановить все действующие промокоды'
+delete_prom_by_code = 'Удалить промокод по коду'
