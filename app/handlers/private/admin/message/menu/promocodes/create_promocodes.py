@@ -11,7 +11,6 @@ from app.utils.db_api.models.promocode_model import Promocode
 
 
 @dp.message_handler(state=CreatePromoCode.wait_for_data)
-@dp.message_handler(state=CreatePromoCode.wait_for_data)
 async def create_promo_codes(message: Message, state: FSMContext, user):
     if not message.text.replace(' ', '').isdigit() or len(message.text.split()) != 3:
         await message.answer(
