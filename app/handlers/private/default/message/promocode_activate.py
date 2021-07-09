@@ -6,6 +6,7 @@ from app.loader import dp
 from app.utils.db_api.models.promocode_model import Promocode
 from app.utils.db_api.models.user_model import User
 
+
 @logger.catch()
 @dp.message_handler(is_promocode=True)
 async def activate_promocode(message: Message, user: User, lang_code, promocode_obj: Promocode):
