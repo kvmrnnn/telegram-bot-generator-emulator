@@ -1,7 +1,7 @@
 from datetime import datetime as dt
 from typing import List, Union
 
-from sqlalchemy import Column, BigInteger, String, Boolean, DateTime
+from sqlalchemy import Column, BigInteger, String, Boolean, DateTime, Float
 
 from app.data.types.user import UserRole, UserDeepLink, UserPhone, UserDataHistory
 from app.loader import config
@@ -30,6 +30,8 @@ class User(BaseModel):
     reason_for_blocking: str = Column(String(255))
 
     online_at: dt = Column(DateTime, default=dt.utcnow())
+
+    balance: float = Column(Float, default=0)
 
     premium_up_to: dt = Column(DateTime, default=dt.utcnow())
 

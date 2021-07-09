@@ -1,0 +1,10 @@
+Personal Area.
+
+<b>Премиум:</b> {user_premium_to_up}
+
+<b>ID:</b> <code>{user_id}</code>
+<b>Username:</b> {user_username}
+<b>Balance:</b> {user_balance} ₽
+
+
+<a href="t.me/{bot_username}?start={user_id}"><b>Your referral link</b></a>

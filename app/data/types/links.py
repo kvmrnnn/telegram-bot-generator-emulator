@@ -8,7 +8,7 @@ class MiscLinks:
 
 @dataclass
 class PhotoLinks:
-    photo: str
+    no_avatars: str
 
 
 @dataclass

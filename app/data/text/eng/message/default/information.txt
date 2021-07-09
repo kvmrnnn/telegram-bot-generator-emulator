@@ -1,0 +1,5 @@
+This service allows you to generate emulators Magnita and 5rochki by card number.
+The bot also sells the function of the software for generating maps by range.
+The bot has generated {count_emulators} emulators.
+
+Our projects:
