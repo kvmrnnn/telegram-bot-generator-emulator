@@ -13,7 +13,7 @@ def keyboard(lang_code) -> ReplyKeyboardMarkup:
             ],
             [
                 KeyboardButton(text[lang_code].button.admin.reply.menu_promocodes),
-                KeyboardButton(text[lang_code].button.admin.reply.menu_sending_messages),
+                KeyboardButton(text[lang_code].button.admin.reply.sending_messages),
             ]
         ]
     )

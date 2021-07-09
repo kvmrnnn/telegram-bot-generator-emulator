@@ -27,7 +27,8 @@ class MagnitCardFilter(BoundFilter):
             text = message.text
         else:
             return False
-
+        if not message.text.isdigit():
+            return False
         cards_data = {}
         for data in text.splitlines():
             code = format_code(data)
