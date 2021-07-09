@@ -10,8 +10,6 @@ from app.utils.db_api.models.user_model import User
 @logger.catch()
 @dp.message_handler(is_promocode=True)
 async def activate_promocode(message: Message, user: User, lang_code, promocode_obj: Promocode):
-    logger.debug(promocode_obj.code)
-    logger.debug(promocode_obj.is_active)
     if not promocode_obj.is_active:
         await message.answer(
             text=text[lang_code].message.default.promocode_not_active.format(
