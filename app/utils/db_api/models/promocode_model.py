@@ -4,7 +4,7 @@ from sqlalchemy import BigInteger, Column, Sequence, String, Boolean
 from app.utils.db_api.db import BaseModel
 
 
-class Procode(BaseModel):
+class Promocode(BaseModel):
     id: int = Column(BigInteger, Sequence('promocode_id'), primary_key=True)
     code: str = Column(String(36), primary_key=True)
     premium_datetime: str = Column(String(51))

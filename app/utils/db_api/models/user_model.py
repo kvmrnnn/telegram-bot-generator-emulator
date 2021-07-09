@@ -50,7 +50,7 @@ class User(BaseModel):
             return self.role in roles
         return self.role == roles
 
-    async def change_premium_time(self, timedelta: dt.timedelta) -> None:
+    async def increase_premium_time(self, timedelta: dt.timedelta) -> None:
         """
         Changes the premium time.
         Args:

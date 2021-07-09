@@ -1,0 +1,4 @@
+Данный промокод не активен.
+
+Код: <code>{promocode}</code>
+Время: <code>{promocode_time}</code>

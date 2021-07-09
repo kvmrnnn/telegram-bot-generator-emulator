@@ -1,0 +1,4 @@
+This promo code is not active.
+
+Code: <code> {promocode} </code>
+Time: <code> {promocode_time} </code>
