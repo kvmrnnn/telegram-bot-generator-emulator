@@ -12,6 +12,9 @@ def keyboard(lang_code) -> ReplyKeyboardMarkup:
                 KeyboardButton(text[lang_code].button.admin.reply.search_info)
             ],
             [
+                KeyboardButton(text[lang_code].button.default.reply.profile)
+            ],
+            [
                 KeyboardButton(text[lang_code].button.admin.reply.menu_promocodes),
                 KeyboardButton(text[lang_code].button.admin.reply.sending_messages),
             ]
