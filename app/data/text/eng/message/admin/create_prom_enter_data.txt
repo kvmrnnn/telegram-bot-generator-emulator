@@ -1,3 +1,5 @@
 Duration of the premium and amount in the format of "days hours amount"
+Days or hours must be greater than 0
+Amount is not 0 and amount is greater than or equal to 20
 Example:
 12 12 12 (12 days, 12 hours и 12 items)

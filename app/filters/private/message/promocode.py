@@ -14,7 +14,6 @@ class PromocodeFilter(BoundFilter):
     async def check(self, message: Message) -> bool:
         if not message.text:
             return False
-        logger.debug(message.text)
         promocode_code = message.text.replace('/start', '').strip()
         promocode = await Promocode.get(promocode_code)
         if promocode:
