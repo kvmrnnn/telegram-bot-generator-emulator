@@ -14,6 +14,11 @@ def make_keyboard_choose_action(lang_code):
                 KeyboardButton(
                     text=text[lang_code].button.admin.reply.delete_prom_by_code
                 )
+            ],
+            [
+                KeyboardButton(
+                    text=text[lang_code].button.default.reply.cancel
+                )
             ]
         ]
     )
