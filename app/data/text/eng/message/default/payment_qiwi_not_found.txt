@@ -1,0 +1,8 @@
+Payment not found!
+
+Payment data.
+
+Qiwi-Wallet: {qiwi_wallet}.
+Comment: {comment}.
+
+Perhaps we haven’t received the payment yet, so repeat in a minute.

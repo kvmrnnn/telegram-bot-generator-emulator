@@ -71,6 +71,10 @@ class User(BaseModel):
     def get_full_name_history(self) -> list:
         return self.full_name_history.rstrip().splitlines()
 
+    async def update_balance(self, amount: int):
+        new_balance = self.balance + amount
+        await self.update_data(balance=new_balance)
+
     async def update_full_name(self, full_name):
         if self.fullname == full_name:
             return False
