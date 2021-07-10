@@ -1,3 +1,5 @@
 bot_rules = 'Bot rules'
 menu_settings_lang_code = 'Language settings'
 upload_user_data = 'Upload data about me'
+buy_premium_week = '7 days for {price}₽'
+buy_premium_month = '30 days for {price} ₽'

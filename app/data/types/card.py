@@ -4,7 +4,7 @@ from typing import Union
 
 class CardType:
     MAGNIT = 'magnit'
-    _5KA = 'pyaterochka'
+    PYATEROCHKA = 'pyaterochka'
 
 
 class CardBank:

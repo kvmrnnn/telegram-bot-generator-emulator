@@ -1,2 +1,4 @@
 premium_account_week:79
 premium_account_month:790
+pw:299.0
+pm:899.0
