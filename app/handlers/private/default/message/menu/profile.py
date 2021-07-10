@@ -2,6 +2,7 @@ from aiogram.types import Message
 from loguru import logger
 
 from app.data import text
+from app.keyboards.default import inline
 from app.loader import dp, config, links
 from app.utils.db_api.models.user_model import User
 from app.utils.format_data.user import format_username, format_premium_to_up
@@ -25,5 +26,6 @@ async def send_menu_profile(message: Message, user: User, lang_code):
             bot_username=bot_data.username,
             user_balance=user.balance,
             user_premium_to_up=format_premium_to_up(user.premium_up_to, lang_code),
-        )
+        ),
+        reply_markup=inline.profile.main_profile.make_keyboard_profile(lang_code)
     )

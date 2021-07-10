@@ -2,7 +2,7 @@ import configparser
 
 from loguru import logger
 
-from app.data.types.config import BotConfig, Config, DatabaseConfig
+from app.data.types.config import BotConfig, Config, DatabaseConfig, QiwiConfig
 
 
 class ConfigLoader:
@@ -18,13 +18,25 @@ class ConfigLoader:
     def get_config(self) -> Config:
         config = Config(
             self._get_bot_config,
-            self._get_database_config
+            self._get_database_config,
+            self._get_qiwi_config
         )
         return config
 
     @property
     def get_bot_commands(self):
         return dict(self._config['BotCommands'])
+
+    @property
+    def _get_qiwi_config(self) -> QiwiConfig:
+        qiwi_config = QiwiConfig(
+            self._config['QiwiConfig']['token'],
+            int(self._config['QiwiConfig']['comment_length']),
+            int(self._config['QiwiConfig']['min_amount_withdraw']),
+            int(self._config['QiwiConfig']['commission_amount']),
+            int(self._config['QiwiConfig']['commission_percent']),
+        )
+        return qiwi_config
 
     @property
     def _get_bot_config(self) -> BotConfig:

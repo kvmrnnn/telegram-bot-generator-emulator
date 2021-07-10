@@ -23,6 +23,16 @@ class DatabaseConfig:
 
 
 @dataclass
+class QiwiConfig:
+    token: str
+    comment_length: int
+    min_amount_withdraw: int
+    commission_amount: int
+    commission_percent: int
+
+
+@dataclass
 class Config:
     bot: BotConfig
     database: DatabaseConfig
+    qiwi: QiwiConfig
