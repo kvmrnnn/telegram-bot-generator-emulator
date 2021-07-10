@@ -1,1 +1,3 @@
-from .accept_send_message import dap
+from .wait_message import dp
+
+__all__ = ['dp']
