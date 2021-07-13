@@ -4,4 +4,5 @@ profile = 'Мой профиль'
 cancel = 'Отменить'
 information = 'Информация'
 menu_soft = 'Софт'
-
+magnit = 'Магнит'
+pyaterochka='Пятерочка'

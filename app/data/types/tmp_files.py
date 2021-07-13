@@ -1,4 +1,5 @@
 import os
+import shutil
 from datetime import datetime
 
 from aiogram.types import InputFile
@@ -11,11 +12,9 @@ class BaseTmpFile:
     def __init__(self, filename=None, extension=None):
         if not extension:
             raise ValueError('extension is None!')
-
         self.filename = BaseTmpFile.format_filename(filename)
         self.extension = extension
-        self.path_to_file = f'{self._path_to_dir_tmp}/{self.filename}.{self.extension}'
-
+        self.__path_to_file = f'{self._path_to_dir_tmp}/{self.filename}.{self.extension}'
         with open(self.path_to_file, 'w') as file:
             pass
 
@@ -28,6 +27,19 @@ class BaseTmpFile:
         if not filename:
             return str(datetime.utcnow()).replace(".", ":").replace(" ", "__").replace(':', '-')
         return filename.replace(".", ":").replace(" ", "_").replace(':', '-')
+
+    @property
+    def path_to_file(self):
+        return self.__path_to_file
+
+    @path_to_file.setter
+    def path_to_file(self, value):
+        if not os.path.isfile(value):
+            shutil.copyfile(self.path_to_file, value)
+        os.remove(self.path_to_file)
+        self.__path_to_file = value
+        self.extension = value.split('.')[-1]
+        self.filename = value.split(os.sep)[-1].replace(self.extension, '')
 
     def __del__(self):
         os.remove(self.path_to_file)

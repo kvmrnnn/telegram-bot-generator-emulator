@@ -39,8 +39,16 @@ class Emulator5ka(EmulatorBase):
     emulator_path = './app/data/cache/emulator_5ka.jpeg'
 
     def __init__(self, code):
-        self.file_qrcode = QRCode5ka(code)
+        self.file_barcode = QRCode5ka(code)
         super().__init__(self.emulator_path)
+        self.generate()
 
+    def generate(self):
+        raw_barcode_img = Image.open(self.file_barcode.path_to_file)
+        emulator_app = Image.open(self.emulator_path)
 
+        cropped_barcode = raw_barcode_img.crop((75, 10, 450, 270))
+        barcode_img = cropped_barcode.resize((420, 320))
 
+        emulator_app.paste(barcode_img, (105, 280))
+        emulator_app.save(self.path_to_file)

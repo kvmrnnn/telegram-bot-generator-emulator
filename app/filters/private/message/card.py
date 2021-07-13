@@ -10,8 +10,8 @@ from app.data.types.card import CardBank
 from app.utils.format_data.card import format_code
 
 
-class MagnitCardFilter(BoundFilter):
-    key = 'magnit_card'
+class CardFilter(BoundFilter):
+    key = 'card'
 
     def __init__(self, magnit_card: bool = None):
         pass
@@ -27,8 +27,10 @@ class MagnitCardFilter(BoundFilter):
             text = message.text
         else:
             return False
-        if not message.text.isdigit():
+
+        if not text.replace('\n', '').isdigit():
             return False
+
         cards_data = {}
         for data in text.splitlines():
             code = format_code(data)

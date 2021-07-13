@@ -9,19 +9,19 @@ from loguru import logger
 
 from app.data import text
 from app.data.types.card import CardType
-from app.data.types.emulator import EmulatorMagnit
-from app.filters.private.message.card import MagnitCardFilter
+from app.data.types.emulator import EmulatorMagnit, Emulator5ka
 from app.loader import dp, config
+from app.states.private.choose_card import ChooseCard
 from app.states.private.generate_qrcode import GenerateQRCode
+from app.utils.bot import send_main_keyboard
 from app.utils.db_api.db import db
 from app.utils.db_api.models.card_model import Card
 from app.utils.db_api.models.user_model import User
 
 
-@dp.message_handler(MagnitCardFilter())
-@dp.message_handler(MagnitCardFilter(), content_types=ContentTypes.DOCUMENT)
-async def send_magnit_emulator(message: Message, state: FSMContext, user: User, lang_code: str, cards_data: dict):
-
+@dp.message_handler(state=ChooseCard.wait_for_type)
+async def send_magnit_emulator(message: Message, state: FSMContext, user: User, lang_code: str, state_data: dict):
+    cards_data = state_data.get('cards_data')
     # Set limit user personal or default.
     generate_limit = user.generate_limit or config.bot.generate_limit_default
 
@@ -60,16 +60,24 @@ async def send_magnit_emulator(message: Message, state: FSMContext, user: User, 
     await GenerateQRCode.process_generate.set()
 
     i = 1
+    card_type = CardType.MAGNIT
+    if message.text == text[lang_code].button.default.reply.pyaterochka:
+        card_type = CardType.PYATEROCHKA
+
     try:
         for code, raw_data in cards_data.items():
             await Card.insert(
-                type=CardType.MAGNIT,
+                type=card_type,
                 code=str(code),
                 raw_data=raw_data,
                 user_id=user.id
             )
             await asyncio.sleep(0.5)
+
             emulator_file = EmulatorMagnit(code)
+            if card_type == CardType.PYATEROCHKA:
+                emulator_file = Emulator5ka(code)
+
             try:
                 await message.answer_photo(emulator_file.input_file, f'{code} {i}')
             except RetryAfter as err:
@@ -83,4 +91,4 @@ async def send_magnit_emulator(message: Message, state: FSMContext, user: User, 
     except Exception as ex:
         logger.debug(ex)
     finally:
-        await state.finish()
+        await send_main_keyboard(user, state)
