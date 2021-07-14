@@ -14,7 +14,7 @@ async def ask_for_payment(call: CallbackQuery, lang_code):
     comment = qiwi_wallet.generate_comments()
     await call.message.answer(
         text=text[lang_code].message.default.qiwi_payment_data.format(
-            qiwi_wallet=config.qiwi.token,
+            qiwi_wallet=qiwi_wallet.number,
             comment=comment
         ),
         reply_markup=inline.check_payment.make_keyboard_check_payment(lang_code=lang_code, comment=comment)

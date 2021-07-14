@@ -16,7 +16,7 @@ async def check_payment(call: CallbackQuery, callback_data: dict, lang_code, use
             show_alert=True,
             cache_time=60,
             text=text[lang_code].message.default.payment_qiwi_not_found.format(
-                qiwi_wallet=config.qiwi.token,
+                qiwi_wallet=qiwi_wallet.number,
                 comment=comment
             )
         )
